@@ -53,15 +53,15 @@ class GlueContext(SQLContext):
     Spark_SQL_Formats = {"parquet", "orc"}
     Unsupported_Compression_Types = {"lzo"}
 
-    def __init__(self, sparkContext, **options):
+    def __init__(self, sparkContext: pyspark.SparkContext, **options):
         super(GlueContext, self).__init__(sparkContext)
         register(sparkContext)
         self._glue_scala_context = self._get_glue_scala_context(**options)
-        self.create_dynamic_frame = DynamicFrameReader(self)
-        self.create_data_frame = DataFrameReader(self)
-        self.write_dynamic_frame = DynamicFrameWriter(self)
-        self.write_data_frame = DataFrameWriter(self)
-        self.spark_session = SparkSession(sparkContext, self._glue_scala_context.getSparkSession())
+        self.create_dynamic_frame: DynamicFrameReader = DynamicFrameReader(self)
+        self.create_data_frame: DataFrameReader = DataFrameReader(self)
+        self.write_dynamic_frame: DynamicFrameWriter = DynamicFrameWriter(self)
+        self.write_data_frame: DataFrameWriter = DataFrameWriter(self)
+        self.spark_session: SparkSession = SparkSession(sparkContext, self._glue_scala_context.getSparkSession())
         self._glue_logger = sparkContext._jvm.GlueLogger()
 
     @property

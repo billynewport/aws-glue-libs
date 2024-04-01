@@ -6,3 +6,11 @@ jars/
 derby.log
 metastore_db/
 *.DS_Store
+
+**/__pycache__/*.pyc
+**/env/*
+dist/*
+**/*.pyi
+**/.terraform/*
+**/*.hcl
+.coverage
